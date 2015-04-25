@@ -1,0 +1,32 @@
+#CODE;ENGLISH;FRENCH;GERMAN;;SPANISH;;;;;;;;;x
+###### Religion/titles definitions;;;;;;;;;;;;;;x
+GK_HUMANITY;Humanity;;;;;;;;;;;;;x
+GK_CRUSADE;Liberation;;;;;;;;;;;;;x
+GK_SCRIPTURE;reality;;;;;;;;;;;;;x
+GK_PIETY_NAME;Reason;;;;;;;;;;;;;x
+GK_PRIEST_TITLE;Scholar;;;;;;;;;;;;;x
+GK_POPE;=Pope=;;;;;;;;;;;;;x
+STAT_PIETY_GK_REASON;Reason;;;;;;;;;;;;;x
+STAT_PIETY_DESC_GK_REASON;Reason is respected by other non-religious people. Like Prestige, it is added to your score on the death of a ruler.;;;;;;;;;;;;;x
+none;None;;;;;;;;;;;;;x
+none_group;None;;;;;;;;;;;;;x
+none_DESC;No religion;;;;;;;;;;;;;x
+
+###### Mercenaries
+d_militant_atheists;Militant Atheists;;;;;;;;;;;;;x
+d_legion_freethinkers;Legion of Freethinkers;;;;;;;;;;;;;x
+d_knights_reason;Knights of Reason;;;;;;;;;;;;;x
+
+###### CB
+GK_SECULAR_LIBERATION;Secular Liberation;;;;;;;;;;;;;x
+secular_liberation_desc;Non-religious rulers can liberate territory from the rule of religious ones. Nearby religious rulers will likely join in the defence.;;;;;;;;;;;;;x
+
+###### Traits
+closeted_atheist;Closeted Atheist;;;;;;;;;;;;;x
+closeted_atheist_desc;This character is an atheist, but is not open about their lack of belief;;;;;;;;;;;;;x
+
+###### Decisions
+become_closeted_atheist;Become Closeted Atheist;;;;;;;;;;;;;x
+become_closeted_atheist_desc;The character lacks a belief in any gods, but is not open about it. Gain Closeted Atheist trait.;;;;;;;;;;;;;x
+convert_to_none_religion;Renounce Religion;;;;;;;;;;;;;x
+convert_to_none_religion_desc;The character renounces religion and openly identifies as secular. This will convert the character to the None religion.;;;;;;;;;;;;;x

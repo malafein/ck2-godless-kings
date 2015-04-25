@@ -1,0 +1,7 @@
+closeted_atheist = {
+	religious = yes
+	ruler_desiner_cost = 0
+	
+	learning = 2
+	intrigue = 1
+}

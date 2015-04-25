@@ -1,0 +1,99 @@
+###k_none_head = {
+###	color = { 255 0 255 }
+###	color2 = { 255 0 0 }
+###	capital = 356
+###	religion = none
+###	controls_religion = none
+###	landless = yes
+###	dynasty_title_names = no
+###	title = "=Pope="
+###}
+###
+###b_roma = {
+###	holy_site = none
+###}
+###
+###b_constantinople = {
+###	holy_site = none
+###}
+###
+###b_jerusalem = {
+###	holy_site = none
+###}
+###
+###b_venezia = {
+###	holy_site = none
+###}
+###
+###b_rialto = {
+###	holy_site = none
+###}
+
+# Mercenaries
+d_legion_freethinkers = {
+	color={ 23 235 235 }
+	color2={ 0 0 0 }
+	
+	capital = 356 #Venice
+
+	religion = none
+	allow = {
+		OR = {
+			trait = closeted_atheist
+			religion_group = none_group
+		}
+	}
+	title = "CAPTAIN"
+	foa = "CAPTAIN_FOA"
+	
+	landless = yes
+	mercenary = yes
+
+	monthly_income = 5
+	primary = no
+	mercenary_type = legion_freethinkers_composition
+	strength_growth_per_century = 1.0	
+	dynasty_title_names = no
+}
+
+# Holy Orders
+d_militant_atheists = {
+	color={ 255 23 23 }
+	color2={ 255 255 255 }
+	
+	capital = 356 #Venice
+
+	religion = none
+	title = "GRANDMASTER"
+	foa = "GRANDMASTER_FOA"
+	
+	landless = yes
+	holy_order = yes
+
+	monthly_income = 5
+	primary = no
+	mercenary_type = militant_atheists_composition
+	strength_growth_per_century = 1.0	
+	dynasty_title_names = no
+}
+
+d_knights_reason = {
+	color={ 255 23 255 }
+	color2={ 33 33 33 }
+	
+	capital = 356 #Venice
+
+	religion = none
+	title = "GRANDMASTER"
+	foa = "GRANDMASTER_FOA"
+	
+	landless = yes
+	holy_order = yes
+
+	monthly_income = 1
+	primary = no
+	mercenary_type = knights_reason_composition
+	strength_growth_per_century = 1.0	
+	dynasty_title_names = no
+}
+

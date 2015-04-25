@@ -1,0 +1,58 @@
+none_group = {
+	has_coa_on_barony_only = yes
+	graphical_culture = westerngfx
+	### crusade_cb = secular_crusade
+	playable = yes
+	ai_peaceful = yes # Will make Hordes lose their super aggressiveness
+	
+	none = {
+		ai_convert_same_group = 2 # always try to convert
+		ai_convert_other_group = 2 # always try to convert
+		
+		icon = 53 ### blank icon
+		color = { 0.6 0.6 0.6 }
+		
+		### crusade_name = GK_CRUSADE
+		scripture_name = GK_SCRIPTURE
+		priest_title = GK_PRIEST_TITLE
+		
+		high_god_name = GK_GOD
+		god_names = {
+			GK_REASON GK_HUMANITY
+		}
+		evil_god_names = {
+			GK_REASON GK_HUMANITY
+		}
+		piety_name = GK_REASON
+				
+		can_excommunicate = no
+		can_grant_divorce = yes
+		can_grant_invasion_cb = invasion
+		can_grant_claim = yes
+		can_hold_temples = yes
+		can_call_crusade = no
+		can_have_antipopes = no
+		can_retire_to_monastery = no
+		priests_can_inherit = yes
+		priests_can_marry = yes
+		female_temple_holders = yes
+		feminist = yes      # Nullifies the negative opinion modifier that vassals normally get if ruler is female or has female heir
+		bs_marriage = yes
+		pc_marriage = yes
+		max_wives = 1
+		max_consorts = 5
+		allow_looting = yes
+		short_reign_opinion_year_mult = 1
+		peace_prestige_loss = no
+		raised_vassal_opinion_loss = yes
+		has_heir_designation = yes
+		
+		peace_piety_gain = 1.0 # Gains 1 piety each month while at peace
+		#intermarry = jain
+		#intermarry = buddhist
+		
+		character_modifier = { learning=5 }
+		
+		dislike_tribal_organization = no
+	}
+}

@@ -1,0 +1,53 @@
+namespace = godless
+
+#################################################
+# Reason Rally Events
+#################################################
+# Cost Money and Reason (piety) to initiate with a decision.
+# For duration of event give a tax bonus.
+# Possible outcomes or events during the rally:
+# - Gain gold from donations
+# - Reason points gained
+# - Character joins realm
+# - County is converted to None
+# - Character is converted to None
+# - Research points gained
+##################################################
+
+# Donations of gold
+character_event = {
+	#Basic event information
+	id = godless.10000
+	desc = EVTDESCgodless.10000
+	# TODO: create a picture for the event
+	picture = GFX_evt_feast
+
+	trigger = {
+		# Eligibility
+		has_character_modifier = hosting_reason_rally
+	}
+	
+	mean_time_to_happen = {
+		#Randomness of the event (not applicable for triggered-only events)
+		days = 1
+		modifier = {
+			factor = 3
+			has_character_flag = reason_rally_donor
+		}
+	}
+	immediate = {
+		#Command block
+		set_character_flag = reason_rally_donor
+	}
+	option = {
+		name = EVTOPTAgodless.10000
+		trigger = {
+			#Option A eligibility condition block
+		}
+		ai_chance = {
+			#Option A modifiers
+		}
+		#Option A command block
+		wealth = 50
+	}
+}

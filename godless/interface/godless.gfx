@@ -1,0 +1,19 @@
+spriteTypes = {
+	spriteType = {
+		name = "GFX_trait_closeted_atheist"
+		texturefile = "gfx/traits/closeted_atheist.dds"
+		noOfFrames = 1
+		norefcount = yes
+		effectFile = "gfx/FX/buttonstate.lua"
+	}
+	
+	spriteType = {
+		name = "GFX_convert_to_none_religion"
+		texturefile = "gfx/interface/convert_to_none_religion.dds"
+	}
+	
+	spriteType = {
+		name = "GFX_become_closeted_atheist"
+		texturefile = "gfx/interface/convert_to_none_religion.dds"
+	}
+}

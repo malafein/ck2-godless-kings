@@ -1,0 +1,79 @@
+decisions = {
+	convert_to_none_religion = {
+		potential = {
+			#Conditions for the decision to appear: Either be Closeted Atheist or have a spouse or consort that is None.
+			NOT = { religion_group = none_group }
+			OR = {
+				trait = closeted_atheist
+				OR = {
+					any_spouse = {
+						religion = none
+						hidden_tooltip = {
+							is_alive = yes
+						}
+					}
+					any_consort = {
+						religion = none
+						hidden_tooltip = {
+							is_alive = yes
+						}
+					}
+				}
+			}
+		}
+		allow = {
+			#Conditions for the decision to be enabled
+		}
+		effect = {
+			#Commands executed when taking the decision
+			prestige = -500
+			if = {
+				limit = { higher_tier_than = BARON }
+				religion_authority = {
+					modifier = ruler_converted_from
+				}
+			}
+			religion = none
+			if = {
+				limit = { higher_tier_than = BARON }
+				hidden_tooltip = {
+					religion_authority = {
+						modifier = ruler_converted_to
+					}
+				}
+			}
+			piety = 200
+		}
+		revoke_allowed = {
+			always = no #Not used in vanilla
+		}
+		ai_will_do = {
+			#Factors for an AI character to take the decision (1 = 100% chance)
+			factor = 20
+		}
+	}
+	
+	become_closeted_atheist = {
+		potential = {
+			#Conditions for the decision to appear
+			NOT = { religion_group = none_group }
+			NOT = { trait = closeted_atheist }
+			trait = cynical
+		}
+		allow = {
+			#Conditions for the decision to be enabled
+		}
+		effect = {
+			#Commands executed when taking the decision
+			add_trait = closeted_atheist
+			piety = -100
+		}
+		revoke_allowed = {
+			always = no #Not used in vanilla
+		}
+		ai_will_do = {
+			#Factors for an AI character to take the decision (1 = 100% chance)
+			factor = 20
+		}
+	}
+}
