@@ -6,6 +6,7 @@
 * Version 0.1
 
 * [Available on Steam Workshop](http://steamcommunity.com/sharedfiles/filedetails/?id=422474485&searchtext=)
+* [Download from here](https://raw.githubusercontent.com/malafein/ck2-godless-kings/blob/master/godless.zip)
 
 #### Description ####
 
