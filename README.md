@@ -34,23 +34,6 @@ Suggestions are welcome.
 
 Thanks!
 
-### How do I get set up for modding? ###
-
-* Mod files for Crusader Kings 2 will be located in the users or home directory. I prefer to keep a separate copy of the files in a workspace directory.
-
-* Tools I use for editing: Notepad++, Gimp with DDS plugin
-
-* It is probably a good idea to keep the game updated to latest version.
-
-* To test, you'll have to run the game with the mod loaded.  There is also a validator tool available.
-
-
-### Contribution guidelines ###
-
-* TODO: come up with some guidelines here..
-
-* [Learn Markdown](https://bitbucket.org/tutorials/markdowndemo)
-
 ### Who do I talk to? ###
 
 * Repo owner / admin: malafein
