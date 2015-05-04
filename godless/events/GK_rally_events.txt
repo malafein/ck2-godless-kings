@@ -1,0 +1,338 @@
+namespace = godless
+
+#################################################
+# Reason Rally Events
+#################################################
+# Cost Money and Reason (piety) to initiate with a decision.
+# For duration of event give a tax bonus.
+# Possible outcomes or events during the rally:
+# - Gain gold from donations
+# - Reason points gained
+# - Character joins realm
+# - County is converted to None
+# - Character is converted to None
+# - Research points gained
+# - Entertainers
+##################################################
+
+# Food Preparations
+character_event = {
+	id = godless.10003
+	desc = "EVTDESCgodless.10003"
+	picture = GFX_evt_feast
+
+	only_rulers = yes
+	capable_only = yes
+	prisoner = no
+
+	is_triggered_only = yes
+
+	trigger = {
+		war = no
+		has_character_modifier = hosting_reason_rally
+		NOT = {
+			has_character_flag = lavishly_food
+		}
+		NOT = {
+			has_character_flag = medium_food
+		}
+		NOT = {
+			has_character_flag = low_food
+		}
+	}
+
+	option = {
+		name = "EVTOPTAgodless.10003" #Spend lavishly on food
+		trigger = { NOT = { trait = temperate } }
+		ai_chance = {
+
+			factor = 30
+
+			modifier = {
+				factor = 0.5
+				trait = greedy
+			}
+			modifier = {
+				factor = 3
+				trait = gluttonous
+			}
+			modifier = {
+				factor = 0.1
+				trait = temperate
+			}
+			modifier = {
+				factor = 2
+				primary_title = { higher_tier_than = DUKE }
+			}
+		}
+		set_character_flag = lavishly_food
+		treasury = -20
+		prestige = 10
+		hidden_tooltip = {
+			character_event = {
+				id = godless.10000 #send invites
+				days = 2
+				random = 5
+			}
+		}
+	}
+	option = {
+		name = "EVTOPTBgodless.10003" #Spend medium on food
+		ai_chance = {
+			factor = 30
+
+			modifier = {
+				factor = 0.5
+				NOT = { trait = greedy }
+			}
+			modifier = {
+				factor = 2
+				NOT = { trait = gluttonous }
+			}
+			modifier = {
+				factor = 2
+				primary_title = { tier = DUKE }
+			}
+		}
+		set_character_flag = medium_food
+		treasury = -10
+		hidden_tooltip = {
+			character_event = {
+				id = godless.10000
+				days = 2
+				random = 5
+			}
+		}
+
+	}
+	option = {
+		name = "EVTOPTCgodless.10003" #Spend low on food
+		trigger = { NOT = { trait = gluttonous } }
+		ai_chance = {
+			factor = 30
+
+			modifier = {
+				factor = 2.5
+				trait = greedy
+			}
+			modifier = {
+				factor = 0.1
+				trait = gluttonous
+			}
+			modifier = {
+				factor = 2
+				primary_title = { tier = COUNT }
+			}
+		}
+		set_character_flag = low_food
+		treasury = -5
+		prestige = -5
+		hidden_tooltip = {
+			character_event = {
+				id = godless.10000
+				days = 2
+				random = 5
+			}
+		}
+
+	}
+}
+
+character_event = {
+	id = godless.10002
+	desc = "EVTDESCgodless.10002"
+	picture = GFX_evt_feast
+	
+	is_triggered_only = yes
+
+	immediate = {
+		hidden_tooltip = {
+			character_event = {
+				id = godless.10003
+				days = 7
+				random = 3
+			}
+		}
+	}
+
+	option = {
+		name = "EVTOPTAgodless.10002"
+	}
+}
+
+###################################
+# Invitations to Rally
+###################################
+
+# Send invites
+character_event = {
+	id = godless.10000
+	desc = "EVTDESCgodless.10000"
+	picture = GFX_evt_feast
+
+	is_triggered_only = yes
+
+	only_rulers = yes
+	capable_only = yes
+	prisoner = no
+
+	trigger = {
+		war = no
+		has_character_modifier = holding_large_feast
+		OR = {
+			has_character_flag = lavishly_food
+			has_character_flag = medium_food
+			has_character_flag = low_food
+		}
+		NOT = {
+			has_character_flag = sent_invitations
+		}
+	}
+	
+	option = {
+		name = "EVTOPTAgodless.10000"
+		set_character_flag = sent_invitations
+		any_vassal = {
+			limit = {
+				prisoner = no
+				NOT = { trait = incapable }
+				NOT = { has_character_modifier = holding_large_feast }
+				war = no
+				is_adult = yes
+			}
+			letter_event = {
+				id = godless.10001
+				days = 1
+				random = 2
+				tooltip = "EVTTOOLTIPgodless.10001"
+			}
+		}
+	}
+}
+
+# Vassal is invited to the rally
+letter_event = {
+	id = godless.10001
+	desc = "EVTDESCgodless.10001"
+	picture = GFX_evt_feast
+
+	is_triggered_only = yes
+
+	option = {
+		name = "EVTOPTAgodless.10001" #Travel to the rally
+		ai_chance = {
+			factor = 1
+			modifier  = {
+				factor = 0.1
+				ai = yes
+				trait = in_hiding
+			}
+			modifier = {
+				factor = 2
+				opinion = { who = from value = -40 }
+			}
+			modifier  = {
+				factor = 2
+				opinion = { who = from value = -20 }
+			}
+		}
+		set_character_flag = coming_to_feast
+		if = {
+			limit = { trait = in_hiding	}
+			remove_trait = in_hiding
+			clr_character_flag = do_not_disturb
+			add_character_modifier = {
+				name = went_out_of_hiding_timer
+				duration = 180
+				hidden = yes
+			}
+			hidden_tooltip = { character_event = { id = CM.6400 } } # Notify plotters and family
+		}
+	}
+	option = {
+		name = "EVTOPTBgodless.10001" #Refuse
+		ai_chance = {
+			factor = 1
+			modifier  = {
+				factor = 0
+				opinion = { who = from value = 0 }
+				NOT = { trait = in_hiding }
+			}
+			modifier  = {
+				factor = 2
+				NOT = { opinion = { who = from value = -60 } }
+			}
+			modifier  = {
+				factor = 2
+				NOT = { opinion = { who = from value = -80 } }
+			}
+		}
+		FROM = {
+			letter_event = {
+				id = godless.10002
+				days = 1
+				random = 2
+				tooltip = "EVTTOOLTIPgodless.10002"
+			}
+		}
+	}
+}
+
+# Vassal refused to come to the rally
+letter_event = {
+	id = godless.10002
+	desc = "EVTDESCgodless.10002"
+	picture = GFX_evt_feast
+
+	is_triggered_only = yes
+
+	option = {
+		name = "EVTOPTAgodless.10002"
+		opinion = {
+			modifier = opinion_dislike
+			who = FROM
+			years = 10
+		}
+	}
+}
+
+###################################
+# Events during Rally
+###################################
+
+# Donations of gold
+character_event = {
+	id = godless.10001
+	desc = EVTDESCgodless.10001
+	# TODO: create a picture for the event
+	picture = GFX_evt_feast
+
+	trigger = {
+		# Eligibility
+		has_character_modifier = hosting_reason_rally
+	}
+	
+	mean_time_to_happen = {
+		#Randomness of the event (not applicable for triggered-only events)
+		days = 1
+		modifier = {
+			factor = 3
+			has_character_flag = reason_rally_donor
+		}
+	}
+	immediate = {
+		#Command block
+		set_character_flag = reason_rally_donor
+	}
+	option = {
+		name = EVTOPTAgodless.10001
+		trigger = {
+			#Option A eligibility condition block
+		}
+		ai_chance = {
+			#Option A modifiers
+		}
+		#Option A command block
+		wealth = 50
+	}
+}

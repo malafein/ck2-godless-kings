@@ -1,53 +1,73 @@
-namespace = godless
 
-#################################################
-# Reason Rally Events
-#################################################
-# Cost Money and Reason (piety) to initiate with a decision.
-# For duration of event give a tax bonus.
-# Possible outcomes or events during the rally:
-# - Gain gold from donations
-# - Reason points gained
-# - Character joins realm
-# - County is converted to None
-# - Character is converted to None
-# - Research points gained
-##################################################
-
-# Donations of gold
+# Closeted Atheist?
 character_event = {
-	#Basic event information
-	id = godless.10000
-	desc = EVTDESCgodless.10000
-	# TODO: create a picture for the event
+	id = godless.11000
+	desc = "EVTDESCgodless.11000"
 	picture = GFX_evt_feast
 
+	capable_only = yes
+
 	trigger = {
-		# Eligibility
-		has_character_modifier = hosting_reason_rally
+		NOT = { religion_group = none_group }
+		NOT = { trait = closeted_atheist }
+		trait = cynical
 	}
 	
 	mean_time_to_happen = {
-		#Randomness of the event (not applicable for triggered-only events)
-		days = 1
-		modifier = {
-			factor = 3
-			has_character_flag = reason_rally_donor
-		}
+		years = 1
 	}
-	immediate = {
-		#Command block
-		set_character_flag = reason_rally_donor
-	}
+
 	option = {
-		name = EVTOPTAgodless.10000
+		name = "EVTOPTAgodless.11000"
 		trigger = {
 			#Option A eligibility condition block
 		}
 		ai_chance = {
 			#Option A modifiers
+			factor = 5
+						
+			modifier = {
+				factor = 1
+				learning = 10
+			}
+			
+			modifier = {
+				factor = 2
+				learning = 20
+			}
+			
+			modifier = {
+				factor = 0
+				piety = 100
+			}
 		}
+		
 		#Option A command block
-		wealth = 50
+		add_trait = closeted_atheist
+		piety = -100
+	}
+	
+	option = {
+		name = "EVTOPTBgodless.11000"
+		trigger = {
+			#Option B eligibility condition block
+		}
+		ai_chance = {
+			#Option B modifiers
+			factor = 35
+			
+			modifier = {
+				factor = 25
+				piety = 100
+			}
+			
+			modifier = {
+				factor = 40
+				piety = 250
+			}
+		}
+		
+		#Option B command block
+		piety = 5
 	}
 }

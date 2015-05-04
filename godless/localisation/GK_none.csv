@@ -1,6 +1,7 @@
 #CODE;ENGLISH;FRENCH;GERMAN;;SPANISH;;;;;;;;;x
 ###### Religion/titles definitions;;;;;;;;;;;;;;x
 GK_HUMANITY;Humanity;;;;;;;;;;;;;x
+GK_REASON;Reason;;;;;;;;;;;;;x
 GK_CRUSADE;Liberation;;;;;;;;;;;;;x
 GK_SCRIPTURE;reality;;;;;;;;;;;;;x
 GK_PIETY_NAME;Reason;;;;;;;;;;;;;x
@@ -30,3 +31,5 @@ become_closeted_atheist;Become Closeted Atheist;;;;;;;;;;;;;x
 become_closeted_atheist_desc;The character lacks a belief in any gods, but is not open about it. Gain Closeted Atheist trait.;;;;;;;;;;;;;x
 convert_to_none_religion;Renounce Religion;;;;;;;;;;;;;x
 convert_to_none_religion_desc;The character renounces religion and openly identifies as secular. This will convert the character to the None religion.;;;;;;;;;;;;;x
+reason_rally;Host Reason Rally;;;;;;;;;;;;;x
+reason_rally_desc;Host a Reason Rally in your capital to promote freethinking and secularism.;;;;;;;;;;;;;x

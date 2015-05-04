@@ -1,0 +1,26 @@
+#CODE;ENGLISH;FRENCH;GERMAN;;SPANISH;;;;;;;;;x
+
+###############################################
+# Reason Rally
+###############################################
+EVTDESCgodless.10003;Prepare food for the Reason Rally;;;;;;;;;;;;;x
+EVTOPTAgodless.10003;Spend lavishly on food;;;;;;;;;;;;;x
+EVTOPTBgodless.10003;Spend moderate amount on food;;;;;;;;;;;;;x
+EVTOPTCgodless.10003;Spend small amount on food;;;;;;;;;;;;;x
+
+EVTDESCgodless.10002;Beginning preparations for the Reason Rally;;;;;;;;;;;;;x
+EVTOPTAgodless.10002;Okay;;;;;;;;;;;;;x
+
+EVTDESCgodless.10000;Send invitations to the Reason Rally;;;;;;;;;;;;;x
+EVTOPTAgodless.10000;Send invitations;;;;;;;;;;;;;x
+
+EVTDESCgodless.10001;Vassal is invited to the rally;;;;;;;;;;;;;x
+EVTOPTAgodless.10001;Travel to the rally;;;;;;;;;;;;;x
+EVTOPTBgodless.10001;Refuse;;;;;;;;;;;;;x
+
+###############################################
+# Closeted Atheist
+###############################################
+EVTDESCgodless.11000;Pondering the existence of the gods.;;;;;;;;;;;;;x
+EVTOPTAgodless.11000;I no longer believe in the gods.;;;;;;;;;;;;;x
+EVTOPTBgodless.11000;I still believe in the gods.;;;;;;;;;;;;;x
