@@ -15,7 +15,7 @@ namespace = godless
 # - Entertainers
 ##################################################
 
-# Food Preparations
+# Rally Preparations
 character_event = {
 	id = godless.10003
 	desc = "EVTDESCgodless.10003"
@@ -31,42 +31,30 @@ character_event = {
 		war = no
 		has_character_modifier = hosting_reason_rally
 		NOT = {
-			has_character_flag = lavishly_food
-		}
-		NOT = {
-			has_character_flag = medium_food
-		}
-		NOT = {
-			has_character_flag = low_food
+			has_character_flag = rally_prepared
 		}
 	}
 
 	option = {
-		name = "EVTOPTAgodless.10003" #Spend lavishly on food
-		trigger = { NOT = { trait = temperate } }
+		name = "EVTOPTAgodless.10003" #Plan to give speech yourself
+		trigger = {
+			NOT = { trait = shy }
+			diplomacy = 8
+		}
 		ai_chance = {
-
 			factor = 30
 
 			modifier = {
-				factor = 0.5
-				trait = greedy
-			}
-			modifier = {
-				factor = 3
-				trait = gluttonous
-			}
-			modifier = {
-				factor = 0.1
-				trait = temperate
+				factor = 2
+				trait = gregarious
 			}
 			modifier = {
 				factor = 2
 				primary_title = { higher_tier_than = DUKE }
 			}
 		}
-		set_character_flag = lavishly_food
-		treasury = -20
+		set_character_flag = rally_prepared
+		set_character_flag = rally_speaker
 		prestige = 10
 		hidden_tooltip = {
 			character_event = {
@@ -77,24 +65,36 @@ character_event = {
 		}
 	}
 	option = {
-		name = "EVTOPTBgodless.10003" #Spend medium on food
-		ai_chance = {
-			factor = 30
-
-			modifier = {
-				factor = 0.5
-				NOT = { trait = greedy }
-			}
-			modifier = {
-				factor = 2
-				NOT = { trait = gluttonous }
-			}
-			modifier = {
-				factor = 2
-				primary_title = { tier = DUKE }
+		name = "EVTOPTBgodless.10003" #Invite speaker from realm
+		trigger = {
+			any_realm_character = {
+				limit = {
+					diplomacy = 8
+					OR = {
+						religion_group = none_group
+						trait = closeted_atheist
+					}
+				}
 			}
 		}
-		set_character_flag = medium_food
+		ai_chance = {
+			factor = 30
+		}
+		random_realm_character = {
+			limit = {
+				diplomacy = 8
+				OR = {
+					religion_group = none_group
+					trait = closeted_atheist
+				}
+			}
+			# set this character as the speaker and make sure he attends rally
+			set_character_flag = rally_speaker
+			set_character_flag = coming_to_rally
+			treasury = 10
+			prestige = 10
+		}
+		set_character_flag = rally_prepared
 		treasury = -10
 		hidden_tooltip = {
 			character_event = {
@@ -106,26 +106,40 @@ character_event = {
 
 	}
 	option = {
-		name = "EVTOPTCgodless.10003" #Spend low on food
-		trigger = { NOT = { trait = gluttonous } }
+		name = "EVTOPTCgodless.10003" #Invite speaker from another realm
+		
 		ai_chance = {
 			factor = 30
-
+			
 			modifier = {
-				factor = 2.5
+				factor = 0.5
 				trait = greedy
 			}
-			modifier = {
-				factor = 0.1
-				trait = gluttonous
-			}
-			modifier = {
-				factor = 2
-				primary_title = { tier = COUNT }
-			}
 		}
-		set_character_flag = low_food
-		treasury = -5
+		
+		# Create a new random speaker
+		create_character = {
+			random_traits = yes
+			religion = none
+			dynasty = random
+		}
+		new_character = {
+			hidden_tooltip = {
+				if = {
+					limit = {
+						NOT = { diplomacy = 10 }
+					}
+					diplomacy = 10
+				}
+			}
+			set_character_flag = rally_speaker
+			set_character_flag = coming_to_rally
+			treasury = 20
+			prestige = 10
+		}
+		
+		set_character_flag = rally_prepared
+		treasury = -20
 		prestige = -5
 		hidden_tooltip = {
 			character_event = {
@@ -149,8 +163,8 @@ character_event = {
 		hidden_tooltip = {
 			character_event = {
 				id = godless.10003
-				days = 7
-				random = 3
+				days = 1
+				random = 2
 			}
 		}
 	}
@@ -178,12 +192,7 @@ character_event = {
 
 	trigger = {
 		war = no
-		has_character_modifier = holding_large_feast
-		OR = {
-			has_character_flag = lavishly_food
-			has_character_flag = medium_food
-			has_character_flag = low_food
-		}
+		has_character_modifier = hosting_reason_rally
 		NOT = {
 			has_character_flag = sent_invitations
 		}
@@ -196,7 +205,7 @@ character_event = {
 			limit = {
 				prisoner = no
 				NOT = { trait = incapable }
-				NOT = { has_character_modifier = holding_large_feast }
+				NOT = { has_character_modifier = hosting_reason_rally }
 				war = no
 				is_adult = yes
 			}
@@ -235,8 +244,23 @@ letter_event = {
 				factor = 2
 				opinion = { who = from value = -20 }
 			}
+			modifier = {
+				factor = 2
+				OR = {
+					religion_group = none_group
+					trait = closeted_atheist
+					trait = cynical
+				}
+			}
+			modifier = {
+				factor = 2
+				AND = {
+					religion_group = none_group
+					trait = zealous
+				}
+			}
 		}
-		set_character_flag = coming_to_feast
+		set_character_flag = coming_to_rally
 		if = {
 			limit = { trait = in_hiding	}
 			remove_trait = in_hiding
@@ -265,6 +289,17 @@ letter_event = {
 			modifier  = {
 				factor = 2
 				NOT = { opinion = { who = from value = -80 } }
+			}
+			modifier = {
+				factor = 1.5
+				NOT = { religion_group = none_group }
+			}
+			modifier = {
+				factor = 2
+				AND = {
+					NOT = { religion_group = none_group }
+					trait = zealous
+				}
 			}
 		}
 		FROM = {
@@ -300,16 +335,77 @@ letter_event = {
 # Events during Rally
 ###################################
 
+#The guests have arrived
+character_event = {
+	id = godless.10004
+	desc = "EVTDESCgodless.10004"
+	picture = GFX_evt_feast
+
+	only_rulers = yes
+	capable_only = yes
+	prisoner = no
+
+	trigger = {
+		war = no
+		has_character_modifier = hosting_reason_rally
+		has_character_flag = sent_invitations
+		NOT = {
+			has_character_flag = host_reason_rally_started
+		}
+		any_vassal = {
+			NOT = {
+				has_character_flag = guest_reason_rally_started
+			}
+			had_character_flag = {
+				flag = coming_to_rally
+				days = 5
+			}
+		}
+	}
+
+	mean_time_to_happen = {
+		months = 1
+	}
+
+	option = {
+		name = "EVTOPTAgodless.10004"
+		set_character_flag = host_reason_rally_started
+		any_vassal = {
+			limit = {
+				has_character_flag =  coming_to_rally
+			}
+			character_event = {
+				id = godless.10005
+				tooltip = "EVTTOOLTIP72016"
+			}
+		}
+	}
+}
+
+#Welcome to the rally!
+character_event = {
+	id = godless.10005
+	desc = "EVTDESCgodless.10005"
+	picture = GFX_evt_feast
+
+	is_triggered_only = yes
+
+	option = {
+		name = "EVTOPTA72016"
+		set_character_flag = guest_reason_rally_started
+	}
+}
+
 # Donations of gold
 character_event = {
-	id = godless.10001
-	desc = EVTDESCgodless.10001
+	id = godless.10006
+	desc = EVTDESCgodless.10006
 	# TODO: create a picture for the event
 	picture = GFX_evt_feast
 
 	trigger = {
 		# Eligibility
-		has_character_modifier = hosting_reason_rally
+		has_character_modifier = host_reason_rally_started
 	}
 	
 	mean_time_to_happen = {
@@ -317,15 +413,15 @@ character_event = {
 		days = 1
 		modifier = {
 			factor = 3
-			has_character_flag = reason_rally_donor
+			has_character_flag = reason_rally_donations
 		}
 	}
 	immediate = {
 		#Command block
-		set_character_flag = reason_rally_donor
+		set_character_flag = reason_rally_donations
 	}
 	option = {
-		name = EVTOPTAgodless.10001
+		name = EVTOPTAgodless.10006
 		trigger = {
 			#Option A eligibility condition block
 		}
@@ -334,5 +430,456 @@ character_event = {
 		}
 		#Option A command block
 		wealth = 50
+	}
+}
+
+# 1st, Musicians and some other entertainers from feast event
+character_event = {
+	id = godless.10007
+	desc = EVTDESCgodless.10007
+	picture = GFX_evt_feast
+
+	only_rulers = yes
+	prisoner = no
+	capable_only = yes
+	
+	trigger = {
+		war = no
+		has_character_modifier = host_reason_rally_started
+		NOT = {
+			has_character_flag = reason_rally_entertainment
+		}
+		
+		any_vassal = {
+			war = no
+			has_character_flag = guest_reason_rally_started
+		}
+	}
+	
+	mean_time_to_happen = {
+		days = 1
+	}
+	
+	option = {
+		name = EVTOPTAgodless.10007
+		prestige = 10
+		
+		# TODO: Or should this be set on the speaker?
+		set_character_flag = reason_rally_entertainment
+		
+		random_vassal = {
+			limit = {
+				has_character_flag = guest_reason_rally_started
+			}
+			
+			#Visitor likes musicians (from feast_events)
+			character_event = {
+				id = 72068
+				tooltip = "EVTTOOLTIP72068"
+			}
+		}
+	}
+}
+
+#TODO: add more entertainment options
+
+# 2nd, Speech
+character_event = {
+	id = godless.10008
+	desc = EVTDESCgodless.10008
+	picture = GFX_evt_feast
+
+	only_rulers = no
+	prisoner = no
+	capable_only = yes
+	
+	trigger = {
+		war = no
+		
+		has_character_flag = rally_speaker
+		
+		# TODO: will this include THIS character?
+		any_realm_character = {
+			war = no
+			has_character_flag = host_reason_rally_started
+			has_character_flag = reason_rally_entertainment
+		}
+	}
+	
+	mean_time_to_happen = {
+		days = 1
+	}
+	
+	option = {
+		name = EVTOPTAgodless.10008
+		prestige = 10
+		
+		# set host flags
+		random_realm_character = {
+			limit = {
+				has_character_flag = host_reason_rally_started
+				has_character_flag = reason_rally_entertainment
+			}
+			
+			clr_character_flag = reason_rally_entertainment
+			set_character_flag = reason_rally_speech
+		}
+	}
+	
+	#TODO: add more options to help guide outcome of rally?
+}
+
+## Things that can happen after entertainment and speech
+# County is converted to None
+province_event = {
+	id = godless.10009
+	desc = EVTDESCgodless.10009
+	picture = GFX_evt_market
+	border = GFX_event_normal_frame_religion
+	
+	trigger = {
+		NOT = {
+			religion = none
+		}
+		owner = {
+			religion = none
+			has_character_flag = host_reason_rally_started
+			has_character_flag = reason_rally_speech
+			NOT = {
+				has_character_flag = reason_rally_conversion
+			}
+		}
+		mean_time_to_happen = {
+			days = 30
+			
+			modifier = {
+				factor = 0.5
+				owner = {
+					is_republic = yes
+				}
+			}
+			
+			modifier = {
+				factor = 0.5
+				owner = {
+					is_theocracy = yes
+				}
+			}
+		}
+		
+		option = {
+			name = EVTOPTAgodless.10009
+			owner = {
+				piety = 100
+				set_character_flag = reason_rally_conversion
+			}
+			religion = none
+		}
+	}
+}
+
+# Character is converted to None
+character_event = {
+	id = godless.10010
+	desc = EVTDESCgodless.10010
+	picture = GFX_evt_heretic
+	border = GFX_event_normal_frame_religion
+	
+	trigger = {
+		NOT = {
+			religion = none
+		}
+		has_character_flag = coming_to_rally
+		trait = closeted_atheist
+		
+		liege = {
+			religion = none
+			has_character_flag = host_reason_rally_started
+			has_character_flag = reason_rally_speech
+		}
+	}
+	
+	mean_time_to_happen = {
+		days = 3
+	}
+	
+	# Become Openly Secular
+	option = {
+		name = EVTOPTAgodless.10010
+		ai_chance = {
+			factor = 1
+			modifier = {
+				factor = 2
+				trait = brave
+			}
+			modifier = {
+				factor = 2
+				OR = {
+					any_spouse = {
+						religion = none
+						hidden_tooltip = {
+							is_alive = yes
+						}
+					}
+					any_consort = {
+						religion = none
+						hidden_tooltip = {
+							is_alive = yes
+						}
+					}
+				}
+			}
+		}
+		
+		if = {
+			limit = { higher_tier_than = BARON }
+			religion_authority = {
+				modifier = ruler_converted_from
+			}
+		}
+		religion = none
+		if = {
+			limit = { higher_tier_than = BARON }
+			hidden_tooltip = {
+				religion_authority = {
+					modifier = ruler_converted_to
+				}
+			}
+		}
+		piety = 100
+		
+		random = {
+			chance = 70
+			
+			add_trait = brave
+			hidden_tooltip = {
+				character_event = {
+					id = 38270 #Notify brave
+				}
+			}
+		}
+		
+		liege = {
+			set_character_flag = reason_rally_conversion
+		}
+	}
+	
+	# Keep your lack of faith to yourself
+	option = {
+		name = EVTOPTBgodless.10010
+		ai_chance = {
+			factor = 1
+			modifier = {
+				factor = 2
+				trait = coward
+			}
+			modifier = {
+				factor = 2
+				trait = shy
+			}
+		}
+	}
+}
+
+# Character gains Closeted Atheist trait
+character_event = {
+	id = godless.10011
+	desc = EVTDESCgodless.10011
+	picture = GFX_evt_heretic
+	border = GFX_event_normal_frame_religion
+	
+	trigger = {
+		NOT = {
+			religion = none
+		}
+		NOT = {
+			trait = closeted_atheist
+		}
+		has_character_flag = coming_to_rally
+		NOT = {
+			has_character_flag = reason_rally_conversion
+		}
+				
+		liege = {
+			religion = none
+			has_character_flag = host_reason_rally_started
+			has_character_flag = reason_rally_speech
+		}
+	}
+	
+	mean_time_to_happen = {
+		days = 3
+	}
+	
+	immediate = {
+		set_character_flag = reason_rally_conversion
+	}
+	
+	# Become closeted_atheist
+	option = {
+		name = EVTOPTAgodless.10011
+		ai_chance = {
+			factor = 0.5
+			
+			modifier = {
+				factor = 1.5
+				trait = cynical
+			}
+			
+			modifier = {
+				factor = 1.5
+				learning = 10
+			}
+			
+			modifier = {
+				factor = 2
+				learning = 20
+			}
+			
+			modifier = {
+				factor = 0.01
+				trait = zealous
+			}
+		}
+		
+		add_trait = closeted_atheist
+		piety = -100
+		
+		liege = {
+			set_character_flag = reason_rally_conversion
+		}
+	}
+	
+	# Remain faithful to religion
+	option = {
+		name = EVTOPTBgodless.10011
+		ai_chance = {
+			factor = 0.30
+			
+			modifier = {
+				factor = 1.5
+				piety = 100
+			}
+			
+			modifier = {
+				factor = 2
+				piety = 250
+			}
+			
+			modifier = {
+				factor = 2
+				trait = zealous
+			}
+		}
+		
+		piety = 5
+	}
+}
+
+#TODO: Character gains Sympathy for Nones trait (new trait)
+
+# Research points gained
+character_event = {
+	id = godless.10012
+	desc = EVTDESCgodless.10012
+	picture = GFX_evt_market
+	
+	trigger = {
+		has_character_flag = host_reason_rally_started
+		has_character_flag = reason_rally_speech
+		NOT = { has_character_flag = reason_rally_research }
+	}
+	
+	mean_time_to_happen = {
+		days = 12
+	}
+	
+	# military
+	option = {
+		name = EVTOPTAgodless.10012
+		random_list = {
+			50 = { military_techpoints = 10 }
+			40 = { military_techpoints = 20 }
+			10 = { military_techpoints = 30 }
+		}
+	}
+	
+	# economy
+	option = {
+		name = EVTOPTBgodless.10012
+		random_list = {
+			50 = { economy_techpoints = 10 }
+			40 = { economy_techpoints = 20 }
+			10 = { economy_techpoints = 30 }
+		}
+	}
+	
+	# culture
+	option = {
+		name = EVTOPTCgodless.10012
+		random_list = {
+			50 = { culture_techpoints = 10 }
+			40 = { culture_techpoints = 20 }
+			10 = { culture_techpoints = 30 }
+		}
+	}
+}
+
+# Reason points and religion_authority gained
+character_event = {
+	id = godless.10013
+	desc = EVTDESCgodless.10013
+	picture = GFX_evt_market
+	
+	trigger = {
+		has_character_flag = host_reason_rally_started
+		has_character_flag = reason_rally_speech
+		NOT = { has_character_flag = reason_rally_research }
+	}
+	
+	mean_time_to_happen = {
+		days = 12
+	}
+	
+	option = {
+		name = EVTOPTAgodless.10013
+		piety = 50
+		religion_authority = {
+			modifier = 2
+		}
+	}
+}
+
+###########################################
+# Flag management                         #
+###########################################
+
+# Safety catch - clears character flags and modifiers
+character_event = {
+	id = godless.10999
+
+	hide_window = yes
+	
+	is_triggered_only = yes
+	
+	immediate = {
+		remove_character_modifier = hosting_reason_rally
+		clr_character_flag = sent_invitations
+		clr_character_flag = host_reason_rally_started
+		clr_character_flag = rally_prepared
+		clr_character_flag = rally_speaker
+		clr_character_flag = reason_rally_donations
+		clr_character_flag = reason_rally_entertainment
+		clr_character_flag = reason_rally_speech
+		clr_character_flag = reason_rally_conversion
+		clr_character_flag = reason_rally_research
+		clr_character_flag = do_not_disturb
+		remove_character_modifier = hosting_reason_rally
+		
+		any_vassal = {
+			clr_character_flag = coming_to_rally
+			clr_character_flag = rally_speaker
+			clr_character_flag = guest_reason_rally_started
+		}
 	}
 }

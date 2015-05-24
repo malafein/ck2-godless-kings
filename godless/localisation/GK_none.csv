@@ -21,6 +21,7 @@ d_knights_reason;Knights of Reason;;;;;;;;;;;;;x
 ###### CB
 GK_SECULAR_LIBERATION;Secular Liberation;;;;;;;;;;;;;x
 secular_liberation_desc;Non-religious rulers can liberate territory from the rule of religious ones. Nearby religious rulers will likely join in the defence.;;;;;;;;;;;;;x
+nick_the_liberator;The Liberator;;;;;;;;;;;;;x
 
 ###### Traits
 closeted_atheist;Closeted Atheist;;;;;;;;;;;;;x
@@ -33,3 +34,6 @@ convert_to_none_religion;Renounce Religion;;;;;;;;;;;;;x
 convert_to_none_religion_desc;The character renounces religion and openly identifies as secular. This will convert the character to the None religion.;;;;;;;;;;;;;x
 reason_rally;Host Reason Rally;;;;;;;;;;;;;x
 reason_rally_desc;Host a Reason Rally in your capital to promote freethinking and secularism.;;;;;;;;;;;;;x
+
+###### Event Modifiers
+hosting_reason_rally;Hosting Reason Rally;;;;;;;;;;;;;x

@@ -3,10 +3,10 @@
 ###############################################
 # Reason Rally
 ###############################################
-EVTDESCgodless.10003;Prepare food for the Reason Rally;;;;;;;;;;;;;x
-EVTOPTAgodless.10003;Spend lavishly on food;;;;;;;;;;;;;x
-EVTOPTBgodless.10003;Spend moderate amount on food;;;;;;;;;;;;;x
-EVTOPTCgodless.10003;Spend small amount on food;;;;;;;;;;;;;x
+EVTDESCgodless.10003;Preparing for the Reason Rally;;;;;;;;;;;;;x
+EVTOPTAgodless.10003;Plan to give speech yourself.;;;;;;;;;;;;;x
+EVTOPTBgodless.10003;Invite a speaker from the realm.;;;;;;;;;;;;;x
+EVTOPTCgodless.10003;Invite a speaker from afar.;;;;;;;;;;;;;x
 
 EVTDESCgodless.10002;Beginning preparations for the Reason Rally;;;;;;;;;;;;;x
 EVTOPTAgodless.10002;Okay;;;;;;;;;;;;;x
@@ -17,6 +17,39 @@ EVTOPTAgodless.10000;Send invitations;;;;;;;;;;;;;x
 EVTDESCgodless.10001;Vassal is invited to the rally;;;;;;;;;;;;;x
 EVTOPTAgodless.10001;Travel to the rally;;;;;;;;;;;;;x
 EVTOPTBgodless.10001;Refuse;;;;;;;;;;;;;x
+
+EVTDESCgodless.10004;The guests have arrived.;;;;;;;;;;;;;x
+EVTOPTAgodless.10004;The event begins.;;;;;;;;;;;;;x
+
+EVTDESCgodless.10005;Welcome to the Reason Rally!;;;;;;;;;;;;;x
+
+EVTDESCgodless.10006;Donations have been collected from attendees.;;;;;;;;;;;;;x
+EVTOPTAgodless.10006;This will be put to good use.;;;;;;;;;;;;;x
+
+EVTDESCgodless.10007;Musicians entertain the guests;;;;;;;;;;;;;x
+EVTOPTAgodless.10007;Okay;;;;;;;;;;;;;x
+
+EVTDESCgodless.10008;Speech;;;;;;;;;;;;;x
+EVTOPTAgodless.10008;That was inspiring;;;;;;;;;;;;;x
+
+EVTDESCgodless.10009;The majority population of a county has abandoned their religion.;;;;;;;;;;;;;x
+EVTOPTAgodless.10009;Excellent work!;;;;;;;;;;;;;x
+
+EVTDESCgodless.10010;During the rally, this could be a good chance to become openly secular.;;;;;;;;;;;;;x
+EVTOPTAgodless.10010;Renounce your religion.;;;;;;;;;;;;;x
+EVTOPTBgodless.10010;Keep your lack of faith to yourself for now.;;;;;;;;;;;;;x
+
+EVTDESCgodless.10011;During the rally, you question your faith.;;;;;;;;;;;;;x
+EVTOPTAgodless.10011;You really don't believe in the gods after all.;;;;;;;;;;;;;x
+EVTOPTBgodless.10011;You maintain your faith.;;;;;;;;;;;;;x
+
+EVTDESCgodless.10012;Bright minds have come together. The exchange of ideas leads to new progress in the technology of your realm.;;;;;;;;;;;;;x
+EVTOPTAgodless.10012;Focus on military technology.;;;;;;;;;;;;;x
+EVTOPTBgodless.10012;Focus on economics.;;;;;;;;;;;;;x
+EVTOPTCgodless.10012;Focus on cultural studies.;;;;;;;;;;;;;x
+
+EVTDESCgodless.10013;The Reason Rally was a great success.;;;;;;;;;;;;;x
+EVTOPTAgodless.10013;Success!;;;;;;;;;;;;;x
 
 ###############################################
 # Closeted Atheist

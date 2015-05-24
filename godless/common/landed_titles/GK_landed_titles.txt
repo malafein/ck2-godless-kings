@@ -9,25 +9,26 @@
 ###	title = "=Pope="
 ###}
 ###
-###b_roma = {
-###	holy_site = none
-###}
-###
-###b_constantinople = {
-###	holy_site = none
-###}
-###
-###b_jerusalem = {
-###	holy_site = none
-###}
-###
-###b_venezia = {
-###	holy_site = none
-###}
-###
-###b_rialto = {
-###	holy_site = none
-###}
+
+b_roma = {
+	holy_site = none
+}
+
+b_constantinople = {
+	holy_site = none
+}
+
+b_jerusalem = {
+	holy_site = none
+}
+
+b_venezia = {
+	holy_site = none
+}
+
+b_piraeaus = {
+	holy_site = none
+}
 
 # Mercenaries
 d_legion_freethinkers = {
