@@ -26,6 +26,7 @@ secular_liberation = {
 	truce_days = 3650
 	is_permanent = yes
 	is_holy_war = yes
+	can_ask_to_join_war = yes
 	battle_warscore_mult = 0.5
 	check_de_jure_tier = KING
 	
@@ -33,7 +34,12 @@ secular_liberation = {
 		ROOT = {
 			religion_authority = 0.05
 			religion_group = none_group
+			piety = 500
 		}
+	}
+	
+	on_add = {
+		piety = -500
 	}
 	
 	can_use = {

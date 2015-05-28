@@ -846,6 +846,7 @@ character_event = {
 		piety = 50
 		religion_authority = {
 			modifier = 2
+			years = 20
 		}
 	}
 }

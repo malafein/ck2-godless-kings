@@ -3,7 +3,7 @@
 ### What is this repository for? ###
 
 * Godless Kings is a mod for Crusader Kings 2 that adds the option of playing secular / non-religious rulers.
-* Version 0.5.2
+* Version 0.5.3
 
 * [Available on Steam Workshop](http://steamcommunity.com/sharedfiles/filedetails/?id=422474485&searchtext=)
 * [Download from here](https://raw.github.com/malafein/ck2-godless-kings/master/godless.zip)
