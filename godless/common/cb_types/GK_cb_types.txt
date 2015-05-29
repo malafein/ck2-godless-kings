@@ -22,7 +22,7 @@
 secular_liberation = {
 	name = GK_SECULAR_LIBERATION
 	war_name = GK_SECULAR_LIBERATION
-	sprite = 9
+	sprite = 11
 	truce_days = 3650
 	is_permanent = yes
 	is_holy_war = yes

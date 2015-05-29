@@ -19,8 +19,8 @@ d_legion_freethinkers;Legion of Freethinkers;;;;;;;;;;;;;x
 d_knights_reason;Knights of Reason;;;;;;;;;;;;;x
 
 ###### CB
-GK_SECULAR_LIBERATION;Secular Liberation of $OTHER_TITLE;;;;;;;;;;;;;x
-secular_liberation_desc;Non-religious rulers can liberate territory from the rule of religious ones. Nearby religious rulers will likely join in the defence.;;;;;;;;;;;;;x
+GK_SECULAR_LIBERATION;Secular Liberation;;;;;;;;;;;;;x
+secular_liberation_desc;Non-religious rulers can liberate territory from the rule of religious ones. Nearby religious rulers will likely join in the defence. Conquered lands will be distributed to claimants and those who contributed most to the war. (Same as a crusade);;;;;;;;;;;;;x
 nick_the_liberator;The Liberator;;;;;;;;;;;;;x
 
 ###### Traits
