@@ -28,11 +28,12 @@ EVTOPTAgodless.10005;Welcome to the Reason Rally!;;;;;;;;;;;;;x
 EVTDESCgodless.10006;Donations have been collected from attendees.;;;;;;;;;;;;;x
 EVTOPTAgodless.10006;This will be put to good use.;;;;;;;;;;;;;x
 
-EVTDESCgodless.10007;Musicians entertain the guests;;;;;;;;;;;;;x
-EVTOPTAgodless.10007;Okay;;;;;;;;;;;;;x
+EVTDESCgodless.10007;Throughout the first day of the rally, musicians, magicians, and comedians entertain the guests.;;;;;;;;;;;;;x
+EVTOPTAgodless.10007;That was fun!;;;;;;;;;;;;;x
 
-EVTDESCgodless.10008;Speech;;;;;;;;;;;;;x
-EVTOPTAgodless.10008;That was inspiring;;;;;;;;;;;;;x
+EVTDESCgodless.10008;People from all over the realm have gathered here in support of reason.  As the keynote speaker of the event, you attempt to unify and energize the crowd.;;;;;;;;;;;;;x
+EVTOPTAgodless.10008;Inspire people to come out as secular.;;;;;;;;;;;;;x
+EVTOPTBgodless.10008;Organize research efforts.;;;;;;;;;;;;;x
 
 EVTDESCgodless.10009;The majority population of a county has abandoned their religion.;;;;;;;;;;;;;x
 EVTOPTAgodless.10009;Excellent work!;;;;;;;;;;;;;x

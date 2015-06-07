@@ -313,7 +313,7 @@ letter_event = {
 character_event = {
 	id = godless.10004
 	desc = "EVTDESCgodless.10004"
-	picture = GFX_evt_feast
+	picture = GFX_evt_reason_rally_crowd
 
 	only_rulers = yes
 	capable_only = yes
@@ -366,7 +366,7 @@ character_event = {
 character_event = {
 	id = godless.10005
 	desc = "EVTDESCgodless.10005"
-	picture = GFX_evt_feast
+	picture = GFX_evt_reason_rally_crowd
 
 	is_triggered_only = yes
 
@@ -380,25 +380,14 @@ character_event = {
 character_event = {
 	id = godless.10006
 	desc = EVTDESCgodless.10006
-	picture = GFX_evt_feast
+	picture = GFX_evt_reason_rally_crowd
 	
-	only_rulers = yes
-	capable_only = yes
-	prisoner = no
-
-	trigger = {
-		has_character_modifier = host_reason_rally_started
-		NOT = {
-			has_character_flag = reason_rally_donations
-		}
-	}
+	is_triggered_only = yes
 	
-	mean_time_to_happen = {
-		days = 2
-	}
 	immediate = {
 		set_character_flag = reason_rally_donations
 	}
+	
 	option = {
 		name = EVTOPTAgodless.10006
 		random_list = {
@@ -407,7 +396,7 @@ character_event = {
 			10 = { wealth = 50 }
 		}
 		
-		log = "godless.10006: donations"
+		log = "godless.10006: reason rally donations"
 	}
 }
 
@@ -415,7 +404,7 @@ character_event = {
 character_event = {
 	id = godless.10007
 	desc = EVTDESCgodless.10007
-	picture = GFX_evt_feast
+	picture = GFX_evt_reason_rally_crowd
 
 	is_triggered_only = yes
 	
@@ -430,6 +419,7 @@ character_event = {
 		# TODO: Or should this be set on the speaker?
 		set_character_flag = reason_rally_entertainment
 		
+		# random guest really approves of the entertainers
 		random_realm_character = {
 			limit = {
 				has_character_flag = guest_reason_rally_started
@@ -441,6 +431,29 @@ character_event = {
 				tooltip = "EVTTOOLTIP72068"
 			}
 		}
+		
+		# if host is speaker, then speak
+		if = { limit = { has_character_flag = rally_speaker }
+			character_event = {
+				id = godless.10008
+				days = 1
+			}
+		}
+		
+		#else, have the speaker speak
+		if = { limit = { NOT = { has_character_flag = rally_speaker} }
+			random_realm_character = {
+				limit = {
+					has_character_flag = rally_speaker
+					has_character_flag = guest_reason_rally_started					
+				}
+				
+				character_event = {
+					id = godless.10008
+					days = 1
+				}
+			}
+		}
 	}
 }
 
@@ -450,53 +463,138 @@ character_event = {
 character_event = {
 	id = godless.10008
 	desc = EVTDESCgodless.10008
-	picture = GFX_evt_feast
+	picture = GFX_evt_reason_rally_crowd
 
-	only_rulers = no
-	prisoner = no
-	capable_only = yes
-	
-	trigger = {
-		war = no
-		
-		has_character_flag = rally_speaker
-		
-		# TODO: will this include THIS character?
-		any_realm_character = {
-			war = no
-			has_character_flag = host_reason_rally_started
-			has_character_flag = reason_rally_entertainment
-		}
-	}
-	
-	mean_time_to_happen = {
-		days = 1
-	}
+	is_triggered_only = yes
 	
 	immediate = {
-		log = "godless.10008: speech happened"
-	}
-	
-	option = {
-		name = EVTOPTAgodless.10008
+		log = "godless.10008: [ROOT.GetTitledName] delivers keynote speech at the Reason Rally."
+		
+		# speaker gains prestige
 		prestige = 10
 		
-		# set host flags
-		random_realm_character = {
+		# if speaker is the host
+		if = {
 			limit = {
 				has_character_flag = host_reason_rally_started
 				has_character_flag = reason_rally_entertainment
 			}
+			save_event_target_as = target_host
+		}
+		
+		# if speaker is not the host
+		if = {
+			limit = {
+				NOT = { has_character_flag = host_reason_rally_started }
+				NOT = { has_character_flag = reason_rally_entertainment }
+			}
+			
+			random_realm_character = {
+				limit = {
+					has_character_flag = host_reason_rally_started
+					has_character_flag = reason_rally_entertainment
+				}
+				save_event_target_as = target_host
+			}
+		}
+		
+		# set host flags and trigger host character events
+		event_target:target_host = {
+			log = "godless.10008: Triggering final rally events with [THIS.GetTitledName] as host."
 			
 			clr_character_flag = reason_rally_entertainment
 			set_character_flag = reason_rally_speech
+			
+			#trigger donations event after 2 days
+			character_event = {
+				id = godless.10006
+				days = 2
+			}
+			
+			# trigger final event after 3 days
+			character_event = {
+				id = godless.10013
+				days = 4
+			}
+		}
+		
+		# trigger Closeted Atheist in attendees
+		any_realm_character = {
+			limit = {
+				NOT = { religion = none }
+				NOT = { trait = closeted_atheist }
+				NOT = { has_character_flag = reason_rally_conversion }
+				has_character_flag = coming_to_rally
+				has_character_flag = guest_reason_rally_started
+			}
+			character_event = {
+				id = godless.10011
+			}
+		}
+		
+		# trigger Conversion events in Closeted Atheist attendees
+		any_realm_character = {
+			limit = {
+				NOT = { religion = none	}
+				NOT = { has_character_flag = reason_rally_conversion }
+				has_character_flag = coming_to_rally
+				has_character_flag = guest_reason_rally_started
+				trait = closeted_atheist
+			}
+			character_event = {
+				id = godless.10010
+			}
 		}
 	}
 	
-	#TODO: add more options to help guide outcome of rally?
+	# County Conversion
+	# Inspire people to come out as secular
+	# TODO: consider making the conversion events part of this option, and then triggering the county conversion if enough people converted?
+	# 		This is really what the main focus of the rally should be.
+	option = {
+		name = EVTOPTAgodless.10008
+		
+		ai_chance = { factor = 9 }
+		
+		trigger = {
+			# host has a province that can be converted, and no character conversion events happened during this rally
+			event_target:target_host = {
+				NOT = { has_character_flag = reason_rally_conversion }
+				any_demesne_province = { NOT = { religion = none } }
+			}
+		}
+		
+		# fire off province conversion event in host's province
+		event_target:target_host = {
+			random_demesne_province = {
+				# TODO: Consider limiting to the capital province that is hosting the rally?
+				limit = { NOT = { religion = none } }
+				
+				#trigger conversion event
+				province_event = {
+					id = godless.10009
+					days = 1
+				}
+			}
+		}
+	}
+	
+	# Organize research efforts
+	option = {
+		name = EVTOPTBgodless.10008
+		ai_chance = { factor = 1 }
+		
+		#trigger research event
+		event_target:target_host = {
+			character_event = {
+				id = godless.10012
+				days = 1
+			}
+		}
+	}
 }
 
-## Things that can happen after entertainment and speech
+## Things that happen after entertainment and speech
 # County is converted to None
 province_event = {
 	id = godless.10009
@@ -504,37 +602,7 @@ province_event = {
 	picture = GFX_evt_market
 	border = GFX_event_normal_frame_religion
 	
-	trigger = {
-		NOT = {
-			religion = none
-		}
-		owner = {
-			religion = none
-			has_character_flag = host_reason_rally_started
-			has_character_flag = reason_rally_speech
-			NOT = {
-				has_character_flag = reason_rally_conversion
-			}
-		}
-	}
-	
-	mean_time_to_happen = {
-		days = 30
-		
-		modifier = {
-			factor = 0.5
-			owner = {
-				is_republic = yes
-			}
-		}
-		
-		modifier = {
-			factor = 0.5
-			owner = {
-				is_theocracy = yes
-			}
-		}
-	}
+	is_triggered_only = yes
 	
 	option = {
 		name = EVTOPTAgodless.10009
@@ -554,27 +622,14 @@ character_event = {
 	picture = GFX_evt_heretic
 	border = GFX_event_normal_frame_religion
 	
-	trigger = {
-		NOT = {
-			religion = none
-		}
-		has_character_flag = coming_to_rally
-		trait = closeted_atheist
-		
-		# TODO: not necessarily their liege, should be any realm character
-		liege = {
-			religion = none
-			has_character_flag = host_reason_rally_started
-			has_character_flag = reason_rally_speech
-		}
-	}
-	
-	mean_time_to_happen = {
-		days = 3
-	}
+	is_triggered_only = yes
 	
 	immediate = {
-		log = "godless.10010: rally character conversion"
+		set_character_flag = reason_rally_conversion
+		random_realm_character = {
+			limit = { has_character_flag = host_reason_rally_started }
+			set_character_flag = reason_rally_conversion
+		}
 	}
 	
 	# Become Openly Secular
@@ -633,11 +688,7 @@ character_event = {
 			}
 		}
 		
-		liege = {
-			set_character_flag = reason_rally_conversion
-		}
-		
-		log = "godless.10010: Option A: Converted to None"
+		log = "godless.10010: [ROOT.GetTitledName] converted to None"
 	}
 	
 	# Keep your lack of faith to yourself
@@ -655,7 +706,7 @@ character_event = {
 			}
 		}
 		
-		log = "godless.10010: Option B: Did not convert"
+		log = "godless.10010: [ROOT.GetTitledName] did not convert"
 	}
 }
 
@@ -666,32 +717,14 @@ character_event = {
 	picture = GFX_evt_heretic
 	border = GFX_event_normal_frame_religion
 	
-	trigger = {
-		NOT = {
-			religion = none
-		}
-		NOT = {
-			trait = closeted_atheist
-		}
-		has_character_flag = coming_to_rally
-		NOT = {
-			has_character_flag = reason_rally_conversion
-		}
-				
-		liege = {
-			religion = none
-			has_character_flag = host_reason_rally_started
-			has_character_flag = reason_rally_speech
-		}
-	}
-	
-	mean_time_to_happen = {
-		days = 3
-	}
+	is_triggered_only = yes
 	
 	immediate = {
 		set_character_flag = reason_rally_conversion
-		log = "godless.10011: character might gain Closeted Atheist trait"
+		random_realm_character = {
+			limit = { has_character_flag = host_reason_rally_started }
+			set_character_flag = reason_rally_conversion
+		}
 	}
 	
 	# Become closeted_atheist
@@ -724,11 +757,7 @@ character_event = {
 		add_trait = closeted_atheist
 		piety = -100
 		
-		liege = {
-			set_character_flag = reason_rally_conversion
-		}
-		
-		log = "godless.10011: character gains Closeted Atheist trait"
+		log = "godless.10011: [ROOT.GetTitledName] gains Closeted Atheist trait"
 	}
 	
 	# Remain faithful to religion
@@ -754,7 +783,7 @@ character_event = {
 		}
 		
 		piety = 5
-		log = "godless.10011: character didn't gain Closeted Atheist trait"
+		log = "godless.10011: [ROOT.GetTitledName] didn't gain Closeted Atheist trait"
 	}
 }
 
@@ -766,15 +795,7 @@ character_event = {
 	desc = EVTDESCgodless.10012
 	picture = GFX_evt_market
 	
-	trigger = {
-		has_character_flag = host_reason_rally_started
-		has_character_flag = reason_rally_speech
-		NOT = { has_character_flag = reason_rally_research }
-	}
-	
-	mean_time_to_happen = {
-		days = 12
-	}
+	is_triggered_only = yes
 	
 	immediate = {
 		log = "godless.10012: Research Points gained."
@@ -815,17 +836,9 @@ character_event = {
 character_event = {
 	id = godless.10013
 	desc = EVTDESCgodless.10013
-	picture = GFX_evt_market
+	picture = GFX_evt_reason_rally_crowd
 	
-	trigger = {
-		has_character_flag = host_reason_rally_started
-		has_character_flag = reason_rally_speech
-		NOT = { has_character_flag = reason_rally_research }
-	}
-	
-	mean_time_to_happen = {
-		days = 12
-	}
+	is_triggered_only = yes
 	
 	option = {
 		name = EVTOPTAgodless.10013
