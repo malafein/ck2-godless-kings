@@ -3,25 +3,27 @@
 ###############################################
 # Reason Rally
 ###############################################
-EVTDESCgodless.10003;Preparing for the Reason Rally;;;;;;;;;;;;;x
-EVTOPTAgodless.10003;Plan to give speech yourself.;;;;;;;;;;;;;x
-EVTOPTBgodless.10003;Invite a speaker from the realm.;;;;;;;;;;;;;x
-EVTOPTCgodless.10003;Invite a speaker from afar.;;;;;;;;;;;;;x
+EVTDESCgodless.10000;Beginning preparations for the Reason Rally;;;;;;;;;;;;;x
+EVTOPTAgodless.10000;Okay;;;;;;;;;;;;;x
 
-EVTDESCgodless.10002;Beginning preparations for the Reason Rally;;;;;;;;;;;;;x
-EVTOPTAgodless.10002;Okay;;;;;;;;;;;;;x
+EVTDESCgodless.10001;Preparing for the Reason Rally;;;;;;;;;;;;;x
+EVTOPTAgodless.10001;Plan to give speech yourself.;;;;;;;;;;;;;x
+EVTOPTBgodless.10001;Invite a speaker from the realm.;;;;;;;;;;;;;x
+EVTOPTCgodless.10001;Invite a speaker from afar.;;;;;;;;;;;;;x
 
-EVTDESCgodless.10000;Send invitations to the Reason Rally;;;;;;;;;;;;;x
-EVTOPTAgodless.10000;Send invitations;;;;;;;;;;;;;x
+EVTDESCgodless.10002;You send invitations for the Reason Rally to everyone in the realm;;;;;;;;;;;;;x
+EVTOPTAgodless.10002;Send the invitations;;;;;;;;;;;;;x
 
-EVTDESCgodless.10001;Vassal is invited to the rally;;;;;;;;;;;;;x
-EVTOPTAgodless.10001;Travel to the rally;;;;;;;;;;;;;x
-EVTOPTBgodless.10001;Refuse;;;;;;;;;;;;;x
+EVTDESCgodless.10003;Someone is invited to the rally;;;;;;;;;;;;;x
+EVTOPTAgodless.10003;Travel to the rally;;;;;;;;;;;;;x
+EVTOPTBgodless.10003;Refuse;;;;;;;;;;;;;x
+EVTTOOLTIPgodless.10003;gets an invitation to the Rally.;;;;;;;;;;;;;x
 
 EVTDESCgodless.10004;The guests have arrived.;;;;;;;;;;;;;x
 EVTOPTAgodless.10004;The event begins.;;;;;;;;;;;;;x
 
 EVTDESCgodless.10005;Welcome to the Reason Rally!;;;;;;;;;;;;;x
+EVTOPTAgodless.10005;Welcome to the Reason Rally!;;;;;;;;;;;;;x
 
 EVTDESCgodless.10006;Donations have been collected from attendees.;;;;;;;;;;;;;x
 EVTOPTAgodless.10006;This will be put to good use.;;;;;;;;;;;;;x

@@ -1,5 +1,10 @@
 hosting_reason_rally = {
+	icon = 7
 	monthly_character_prestige = 0.05
 	monthly_character_piety = 1
+}
+
+reason_rally_province = {
 	icon = 7
+	local_tax_modifier = 0.10
 }

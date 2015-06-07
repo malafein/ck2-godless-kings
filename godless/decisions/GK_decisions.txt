@@ -116,7 +116,13 @@ decisions = {
 			wealth = -25
 			add_character_modifier = {
 				name = hosting_reason_rally
-				duration = -1
+				duration = 45
+			}
+			capital_scope = {
+				add_province_modifier = {
+					name = reason_rally_province
+					duration = 45
+				}
 			}
 			set_character_flag = recent_minor_decision
 			set_character_flag = do_not_disturb
@@ -124,12 +130,12 @@ decisions = {
 			
 			hidden_tooltip = {
 				character_event = {
-					id = godless.10003
+					id = godless.10001
 					days = 14
 				}
 				
 				letter_event = { 
-					id = godless.10002  
+					id = godless.10000
 				}
 			}
 		}
